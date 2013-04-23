@@ -7,7 +7,7 @@ ChatWork の特定のルームをミュートする Google Chrome 用の extensi
 1. [chatwork-mute-room-extension.crx](https://github.com/chocoby/chatwork-mute-room-extension/raw/master/chatwork-mute-room-extension.crx) を右クリックして
 「リンク先を別名で保存」で適当な場所に保存します。
 
-2. Google Chrome で「ツール」-「拡張機能」を開き、`chatwork-replace-icons-extension.crx` をウィンドウ内にドラッグアンドドロップします。
+2. Google Chrome で「ツール」-「拡張機能」を開き、`chatwork-mute-room-extension.crx` をウィンドウ内にドラッグアンドドロップします。
 
 3. Chrome のメニューバーにアイコンが追加されていますので、「+」を押してミュートしたいルームの ID (ex. `cw_r1234567`)を入力し、「Save」を押してください。
    ルームの ID は、該当ルームを右クリックして「要素を検証」で確認できます。
