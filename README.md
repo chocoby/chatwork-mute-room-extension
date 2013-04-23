@@ -4,8 +4,6 @@ ChatWork の特定のルームをミュートする Google Chrome 用の extensi
 
 ## インストール
 
-あらかじめ Chatworker を動かして、アイコンを追加しておく必要があります。詳しくは [Chatworker の README](https://github.com/asonas/chatworker) を参照してください。
-
 1. [chatwork-mute-room-extension.crx](https://github.com/chocoby/chatwork-mute-room-extension/raw/master/chatwork-mute-room-extension.crx) を右クリックして
 「リンク先を別名で保存」で適当な場所に保存します。
 
