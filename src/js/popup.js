@@ -1,7 +1,7 @@
 //@ sourceMappingURL=popup.map
 (function() {
   $("#add").click(function() {
-    return $("#roomIds").append('<div class="room"><input type="text" size="20" placeholder="cw_r1234567"><button class="remove">-</button>');
+    return $("#roomIds").append('<div class="room"><input type="text" size="15" placeholder="cw_r1234567"><button class="remove">-</button>');
   });
 
   $("#save").click(function() {
@@ -40,7 +40,7 @@
       options = response.options;
       if (options && options.excludeRooms) {
         return $.each(options.excludeRooms, function(_, room) {
-          return $("#roomIds").append('<div class="room"><input type="text" size="20" placeholder="cw_r1234567" value="' + room + '"><button class="remove">-</button>');
+          return $("#roomIds").append('<div class="room"><input type="text" size="15" placeholder="cw_r1234567" value="' + room + '"><button class="remove">-</button>');
         });
       }
     });
