@@ -6,10 +6,14 @@ handleDOM = ->
 
   timer = setTimeout ->
     $.each excludeRooms, (_, roomId) ->
-      selector = "#cw_roomlist_items_area ##{roomId} .ui_roomlist_view .ui_incomplete"
+      selector = "#_roomListItems li[data-rid=#{roomId}]"
+
       domObj = $(selector)
       if domObj.length == 1
-        domObj.remove()
+        domObj = domObj[0]
+        $(domObj).removeClass("roomUnread")
+        badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete')[0]
+        badgeDomObj.remove()
 
     timer = 0
   , 5
@@ -21,5 +25,5 @@ $(document).ready ->
     if response.status == "success"
       excludeRooms = response.options.excludeRooms
 
-      $("#cw_roomlist_items_area").on "DOMNodeInserted", (event) ->
+      $("#_roomListArea").on "DOMNodeInserted", (event) ->
         handleDOM()

@@ -1,6 +1,6 @@
 $("#add").click ->
   $("#roomIds")
-    .append('<div class="room"><input type="text" size="15" placeholder="cw_r1234567"><button class="remove">-</button>')
+    .append('<div class="room"><input type="text" size="15" placeholder="1234567"><button class="remove">-</button>')
 
 $("#save").click ->
   excludeRooms = []
@@ -25,4 +25,4 @@ $(document).ready ->
     if options && options.excludeRooms
       $.each options.excludeRooms, (_, room) ->
         $("#roomIds")
-          .append('<div class="room"><input type="text" size="15" placeholder="cw_r1234567" value="' + room + '"><button class="remove">-</button>')
+          .append('<div class="room"><input type="text" size="15" placeholder="1234567" value="' + room + '"><button class="remove">-</button>')
