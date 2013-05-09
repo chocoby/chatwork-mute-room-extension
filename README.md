@@ -49,6 +49,10 @@ ChatWork の仕様変更による対応で、バージョンごとの互換性�
 
 ## 変更履歴
 
+### [v0.0.3](https://github.com/chocoby/chatwork-mute-room-extension/tree/v0.0.3) (2013/05/09)
+
+* 未読数のないルームを除外した時にエラーになる問題を修正
+
 ### [v0.0.2](https://github.com/chocoby/chatwork-mute-room-extension/tree/v0.0.2) (2013/05/08)
 
 * ChatWork の仕様変更に対応

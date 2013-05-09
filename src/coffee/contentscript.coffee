@@ -12,8 +12,10 @@ handleDOM = ->
       if domObj.length == 1
         domObj = domObj[0]
         $(domObj).removeClass("roomUnread")
-        badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete')[0]
-        badgeDomObj.remove()
+
+        badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete')
+        if badgeDomObj.length == 1
+          badgeDomObj[0].remove()
 
     timer = 0
   , 5

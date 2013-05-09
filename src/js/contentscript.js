@@ -19,8 +19,10 @@
         if (domObj.length === 1) {
           domObj = domObj[0];
           $(domObj).removeClass("roomUnread");
-          badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete')[0];
-          return badgeDomObj.remove();
+          badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete');
+          if (badgeDomObj.length === 1) {
+            return badgeDomObj[0].remove();
+          }
         }
       });
       return timer = 0;

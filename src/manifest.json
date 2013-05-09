@@ -1,7 +1,7 @@
 {
   "name": "ChatWork Mute Room Extension",
   "description": "Mute Room in ChatWork.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "background": {
     "scripts": ["js/jquery-2.0.0.min.js", "js/background.js"],
