@@ -4,7 +4,6 @@
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     var options;
-
     switch (request.mode) {
       case "initialize":
         options = loadOptions();
@@ -34,7 +33,6 @@
 
   saveOptions = function(options) {
     var option_json;
-
     option_json = JSON.stringify(options);
     return localStorage.setItem("options", option_json);
   };

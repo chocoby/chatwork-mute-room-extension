@@ -6,11 +6,9 @@
 
   $("#save").click(function() {
     var excludeRooms, options;
-
     excludeRooms = [];
     $("#roomIds .room").each(function(_, room) {
       var roomId;
-
       roomId = $(room).children("input").val();
       if (roomId.length > 0) {
         return excludeRooms.push(roomId);
@@ -36,7 +34,6 @@
       mode: "loadOptions"
     }, function(response) {
       var options;
-
       options = response.options;
       if (options && options.excludeRooms) {
         return $.each(options.excludeRooms, function(_, room) {
