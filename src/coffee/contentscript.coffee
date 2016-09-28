@@ -32,7 +32,7 @@ handleDOM = ->
         $(domObj).removeClass 'roomUnread'
         badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete .unread')
         if badgeDomObj.length == 1
-          return badgeDomObj[0].remove()
+          badgeDomObj[0].remove()
       return
     setCustomTitle()
     timer = 0
@@ -45,6 +45,6 @@ $(document).ready ->
       excludeRooms = response.options.excludeRooms
       unreadRoomsName = getUnreadRoomsName()
       setCustomTitle()
-      return $('#_roomListArea').on('DOMNodeInserted', (event) ->
+      handleDOM()
+      $('#_roomListArea').on 'DOMNodeInserted', (event) ->
         handleDOM()
-      )
