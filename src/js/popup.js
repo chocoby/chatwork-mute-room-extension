@@ -1,4 +1,3 @@
-//@ sourceMappingURL=popup.map
 (function() {
   $("#add").click(function() {
     return $("#roomIds").append('<div class="room"><input type="text" size="15" placeholder="1234567"><button class="remove">-</button>');
@@ -44,3 +43,5 @@
   });
 
 }).call(this);
+
+//# sourceMappingURL=popup.js.map

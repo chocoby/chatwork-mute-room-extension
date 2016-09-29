@@ -1,4 +1,3 @@
-//@ sourceMappingURL=contentscript.map
 (function() {
   var excludeRooms, getMentionCounts, getUnreadRoomsName, handleDOM, setCustomTitle, timer, unreadRoomsName;
 
@@ -71,3 +70,5 @@
   });
 
 }).call(this);
+
+//# sourceMappingURL=contentscript.js.map

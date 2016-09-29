@@ -1,4 +1,3 @@
-//@ sourceMappingURL=background.map
 (function() {
   var loadOptions, saveOptions;
 
@@ -42,3 +41,5 @@
   };
 
 }).call(this);
+
+//# sourceMappingURL=background.js.map
