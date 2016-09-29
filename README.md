@@ -70,7 +70,7 @@ CoffeeScript から JavaScript に変換:
 ```
 % cd src
 % npm install --save-dev
-% grunt watch
+% node_modules/grunt-cli/bin/grunt watch
 ```
 
 パッケージ化するためのディレクトリを作成:
