@@ -1,4 +1,4 @@
-# chatwork-mute-room-extension
+# [ChatWork Mute Room Extension](https://github.com/chocoby/chatwork-mute-room-extension)
 
 ChatWork の特定のルームをミュートする Google Chrome 用の extension です。
 
@@ -79,11 +79,3 @@ CoffeeScript から JavaScript に変換:
 # repo root directory
 % sh src/package.sh
 ```
-
-## GitHub
-
-https://github.com/chocoby/chatwork-mute-room-extension
-
-## ライセンス
-
-MIT: http://chocoby.mit-license.org/
