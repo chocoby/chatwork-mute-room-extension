@@ -47,21 +47,9 @@ ChatWork の仕様変更による対応で、バージョンごとの互換性�
 * ChatWork 側の変更により、動作しなくなる可能性があります。
 * ご利用は自己責任でお願いします。
 
-## 変更履歴
+## CHANGELOG
 
-### [v0.0.3](https://github.com/chocoby/chatwork-mute-room-extension/tree/v0.0.3) (2013/05/09)
-
-* 未読数のないルームを除外した時にエラーになる問題を修正
-
-### [v0.0.2](https://github.com/chocoby/chatwork-mute-room-extension/tree/v0.0.2) (2013/05/08)
-
-* ChatWork の仕様変更に対応
-
-  ルーム ID を `cw_r` から始まる形式で設定している場合、`cw_r` を削除してください。
-
-### [v0.0.1](https://github.com/chocoby/chatwork-mute-room-extension/tree/v0.0.1) (2013/04/23)
-
-* 初期リリース
+See [Releases](https://github.com/chocoby/chatwork-mute-room-extension/releases)
 
 ## 開発
 
