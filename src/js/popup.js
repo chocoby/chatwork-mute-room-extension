@@ -34,7 +34,7 @@ document.getElementById('save').addEventListener('click', () => {
 });
 
 document.addEventListener('click', event => {
-  if (event.target.className === 'remove') {
+  if (event.target.classList.contains('remove')) {
     event.target.parentNode.remove();
   }
 });
