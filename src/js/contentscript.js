@@ -5,13 +5,13 @@ let unreadRoomsName = [];
 let timer = 0;
 
 function getMentionCounts() {
-  return $('#_roomListArea .mention').length;
+  return document.querySelectorAll('#_roomListArea .mention').length;
 }
 
 function getUnreadRoomsName() {
-  let unreadRoomsName;
+  let unreadRoomsName = document.querySelectorAll('#_roomListItems .roomUnread .chatListTitleArea');
+  unreadRoomsName = Array.apply(null, unreadRoomsName).map((room) => { return room.textContent; });
 
-  unreadRoomsName = $.map($('#_roomListItems .roomUnread .chatListTitleArea'), $.text);
   if (unreadRoomsName.length === 0) {
     unreadRoomsName = ['No message!'];
   }
@@ -30,16 +30,15 @@ function handleDOM() {
 
   timer = setTimeout(() => {
     unreadRoomsName = getUnreadRoomsName();
-    $.each(excludeRooms, (_, roomId) => {
-      let selector = `#_roomListItems li[data-rid=${roomId}]`;
-      let domObj = $(selector);
-      if (domObj.length === 1) {
-        domObj = domObj[0];
-        unreadRoomsName.splice(unreadRoomsName.indexOf($(`${selector} .chatListTitleArea`).text()), 1);
-        $(domObj).removeClass('roomUnread');
-        let badgeDomObj = $(domObj).find('.chatListMeta ul.incomplete .unread');
-        if (badgeDomObj.length === 1) {
-          badgeDomObj[0].remove();
+    excludeRooms.forEach((roomId, _) => {
+      let selector = `#_roomListItems li[data-rid="${roomId}"]`;
+      let domObj = document.querySelector(selector);
+      if (domObj !== null) {
+        unreadRoomsName.splice(unreadRoomsName.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
+        domObj.classList.remove('roomUnread');
+        let badgeDomObj = domObj.querySelector('.chatListMeta ul.incomplete .unread');
+        if (badgeDomObj !== null) {
+          badgeDomObj.remove();
         }
       }
     });
@@ -48,16 +47,15 @@ function handleDOM() {
   }, 5);
 }
 
-$(document).ready(() => {
-  chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
-    if (response.status === 'success') {
-      excludeRooms = response.options.excludeRooms;
-      unreadRoomsName = getUnreadRoomsName();
-      setCustomTitle();
+chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
+  if (response.status === 'success') {
+    excludeRooms = response.options.excludeRooms;
+    unreadRoomsName = getUnreadRoomsName();
+    setCustomTitle();
+    handleDOM();
+
+    document.querySelector('#_roomListArea').addEventListener('DOMNodeInserted', () => {
       handleDOM();
-      $('#_roomListArea').on('DOMNodeInserted', (event) => {
-        handleDOM();
-      });
-    }
-  });
-})
+    });
+  }
+});

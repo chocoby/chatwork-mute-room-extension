@@ -1,13 +1,22 @@
 'use strict';
 
-$("#add").click(() => {
-  $("#roomIds").append('<div class="room"><input type="text" size="15" placeholder="1234567"><button class="remove">-</button>');
-});
+function addInput(roomId = '') {
+  const room = document.createElement('div');
+  room.classList.add('room');
+  room.innerHTML = `<input type="text" size="15" placeholder="1234567" value=${roomId}><button class="remove">-</button>`;
+  document.getElementById('roomIds').appendChild(room);
+}
 
-$("#save").click(() => {
+document.getElementById('add').addEventListener('click', () => {
+  addInput();
+})
+
+document.getElementById('save').addEventListener('click', () => {
   let excludeRooms = [];
-  $("#roomIds .room").each((_, room) => {
-    const roomId = $(room).children("input").val();
+
+  let elements = document.querySelectorAll('#roomIds .room');
+  Array.prototype.forEach.call(elements, (room, _) => {
+    const roomId = room.querySelector('input').value;
     if (roomId.length > 0) {
       excludeRooms.push(roomId);
     }
@@ -19,22 +28,22 @@ $("#save").click(() => {
   chrome.runtime.sendMessage({
     mode: "saveOptions",
     options: options
-  }, (response) => {
-    $("#status").text("Saved.");
+  }, response => {
+    document.getElementById('status').textContent = 'Saved.';
   });
 });
 
-$(document).on('click', '.remove', event => {
-  $(event.currentTarget).parent().remove();
+document.addEventListener('click', event => {
+  if (event.target.className === 'remove') {
+    event.target.parentNode.remove();
+  }
 });
 
-$(document).ready(function() {
-  chrome.runtime.sendMessage({ mode: "loadOptions" }, response => {
-    const options = response.options;
-    if (options && options.excludeRooms) {
-      $.each(options.excludeRooms, (_, room) => {
-        $("#roomIds").append(`<div class="room"><input type="text" size="15" placeholder="1234567" value="${room}"><button class="remove">-</button>`);
-      });
-    }
-  });
+chrome.runtime.sendMessage({ mode: 'loadOptions' }, response => {
+  const options = response.options;
+  if (options && options.excludeRooms) {
+    options.excludeRooms.forEach((roomId, _) => {
+      addInput(roomId);
+    });
+  }
 });
