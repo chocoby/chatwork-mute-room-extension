@@ -65,14 +65,6 @@ ChatWork の仕様変更による対応で、バージョンごとの互換性�
 
 ## 開発
 
-CoffeeScript から JavaScript に変換:
-
-```
-% cd src
-% npm install --save-dev
-% node_modules/grunt-cli/bin/grunt watch
-```
-
 パッケージ化するためのディレクトリを作成:
 
 ```

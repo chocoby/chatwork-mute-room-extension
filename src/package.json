@@ -1,19 +1,14 @@
 {
-  "name": "chatwork-mute-room-extension",
-  "version": "0.0.1",
+  "name": "ChatWork Mute Room Extension",
+  "version": "1.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "http://github.com/chocoby/chatwork-mute-room-extension",
-  "author": "chocoby",
+  "repository": "https://github.com/chocoby/chatwork-mute-room-extension",
+  "author": "Kenta Okamoto",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "~1.0.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-coffee": "0.0.6",
-    "grunt-contrib-coffee": "~1.0.0",
-    "grunt-contrib-watch": "~1.0.0"
   }
 }
