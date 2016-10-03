@@ -31,7 +31,7 @@ function handleDOM() {
   timer = setTimeout(() => {
     unreadRoomsName = getUnreadRoomsName();
     muteRoomIds.forEach((roomId, _) => {
-      let selector = `#_roomListItems li[data-rid="${roomId}"]`;
+      let selector = `#_roomListItems li[data-rid="${roomId}"].roomUnread`;
       let domObj = document.querySelector(selector);
       if (domObj !== null) {
         unreadRoomsName.splice(unreadRoomsName.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
