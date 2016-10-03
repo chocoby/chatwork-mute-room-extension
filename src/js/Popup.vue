@@ -12,6 +12,14 @@
       <input type="text" size="15" placeholder="1234567" v-model="newMuteRoomId"><button v-on:click="add" v-bind:disabled="newMuteRoomId === ''">Add</button>
     </div>
 
+    <h2>Options</h2>
+
+    <div class="form">
+      <label>
+        <input type="checkbox" v-model="displaySeparatedNames">Display separated room names
+      </label>
+    </div>
+
     <div>
       <p>{{ message }}</p>
       <button v-on:click="save">Save</button>
@@ -26,6 +34,7 @@ export default {
       message: '',
       muteRoomIds: [],
       newMuteRoomId: '',
+      displaySeparatedNames: false,
     }
   },
 
@@ -49,12 +58,17 @@ export default {
             this.muteRoomIds.push(roomId);
           });
         }
+
+        if (options.displaySeparatedNames) {
+          this.displaySeparatedNames = options.displaySeparatedNames;
+        }
       });
     },
 
     save() {
       const options = {
-        muteRoomIds: this.muteRoomIds
+        muteRoomIds: this.muteRoomIds,
+        displaySeparatedNames: this.displaySeparatedNames,
       };
       chrome.runtime.sendMessage({
         mode: "saveOptions",

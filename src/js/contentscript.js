@@ -1,6 +1,7 @@
 'use strict';
 
 let muteRoomIds = [];
+let displaySeparatedNames = false;
 let unreadRoomsName = [];
 let timer = 0;
 
@@ -20,7 +21,18 @@ function getUnreadRoomsName() {
 }
 
 function setCustomTitle() {
-  document.title = `[${unreadRoomsName.length}](${getMentionCounts()}) - ${unreadRoomsName.join('|')}`;
+  let title = `[${unreadRoomsName.length}]`;
+  if (getMentionCounts() > 0) {
+    title += `(${getMentionCounts()})`;
+  }
+
+  if (displaySeparatedNames) {
+    title += ` - ${unreadRoomsName.join('|')}`;
+  } else {
+    title += ` - ChatWork`;
+  }
+
+  document.title = title;
 }
 
 function handleDOM() {
@@ -44,7 +56,7 @@ function handleDOM() {
     });
     setCustomTitle();
     timer = 0;
-  }, 5);
+  }, 100);
 }
 
 chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
@@ -54,9 +66,12 @@ chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
     }
 
     muteRoomIds = response.options.muteRoomIds;
+    displaySeparatedNames = response.options.displaySeparatedNames;
     unreadRoomsName = getUnreadRoomsName();
-    setCustomTitle();
-    handleDOM();
+
+    setTimeout(() => {
+      handleDOM();
+    }, 1000);
 
     document.querySelector('#_roomListArea').addEventListener('DOMNodeInserted', () => {
       handleDOM();
