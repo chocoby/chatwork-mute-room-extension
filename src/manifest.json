@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "manifest_version": 2,
   "background": {
-    "scripts": ["js/background.js"],
+    "scripts": ["build/js/background.js"],
     "persistent": false
   },
   "browser_action": {
@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.chatwork.com/*"],
-      "js": ["js/contentscript.js"],
+      "js": ["build/js/contentscript.js"],
       "run_at": "document_end"
     }
   ]

@@ -51,11 +51,18 @@ ChatWork の仕様変更による対応で、バージョンごとの互換性�
 
 See [Releases](https://github.com/chocoby/chatwork-mute-room-extension/releases)
 
-## 開発
-
-パッケージ化するためのディレクトリを作成:
+## Development
 
 ```
-# repo root directory
-% sh src/package.sh
+$ cd src
+$ npm install
+$ npm run watch
+$ vim
+```
+
+To package files:
+
+```
+$ cd src
+$ npm run build:package
 ```

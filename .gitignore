@@ -1,4 +1,4 @@
 *.pem
-/chatwork-mute-room-extension
-src/package
+/chatwork-mute-room
 src/node_modules
+src/build
