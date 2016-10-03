@@ -61,5 +61,8 @@ chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
     document.querySelector('#_roomListArea').addEventListener('DOMNodeInserted', () => {
       handleDOM();
     });
+    document.querySelector('title').addEventListener('DOMSubtreeModified', () => {
+      handleDOM();
+    });
   }
 });
