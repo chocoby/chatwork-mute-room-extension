@@ -1,6 +1,6 @@
 'use strict';
 
-let excludeRooms = [];
+let muteRoomIds = [];
 let unreadRoomsName = [];
 let timer = 0;
 
@@ -30,7 +30,7 @@ function handleDOM() {
 
   timer = setTimeout(() => {
     unreadRoomsName = getUnreadRoomsName();
-    excludeRooms.forEach((roomId, _) => {
+    muteRoomIds.forEach((roomId, _) => {
       let selector = `#_roomListItems li[data-rid="${roomId}"]`;
       let domObj = document.querySelector(selector);
       if (domObj !== null) {
@@ -49,7 +49,11 @@ function handleDOM() {
 
 chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
   if (response.status === 'success') {
-    excludeRooms = response.options.excludeRooms;
+    if (response.options.muteRoomIds === undefined) {
+      return;
+    }
+
+    muteRoomIds = response.options.muteRoomIds;
     unreadRoomsName = getUnreadRoomsName();
     setCustomTitle();
     handleDOM();
