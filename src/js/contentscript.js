@@ -1,6 +1,7 @@
 'use strict';
 
 let muteRoomIds = [];
+let enabled = true;
 let displaySeparatedNames = false;
 let unreadRoomsName = [];
 let timer = 0;
@@ -62,6 +63,10 @@ function handleDOM() {
 chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
   if (response.status === 'success') {
     if (response.options.muteRoomIds === undefined) {
+      return;
+    }
+
+    if (response.options.enabled !== true) {
       return;
     }
 

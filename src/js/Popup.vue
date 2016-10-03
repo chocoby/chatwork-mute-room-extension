@@ -16,6 +16,12 @@
 
     <div class="form">
       <label>
+        <input type="checkbox" v-model="enabled">Enable
+      </label>
+
+      <br>
+
+      <label>
         <input type="checkbox" v-model="displaySeparatedNames">Display separated room names
       </label>
     </div>
@@ -34,6 +40,7 @@ export default {
       message: '',
       muteRoomIds: [],
       newMuteRoomId: '',
+      enabled: true,
       displaySeparatedNames: false,
     }
   },
@@ -59,15 +66,15 @@ export default {
           });
         }
 
-        if (options.displaySeparatedNames) {
-          this.displaySeparatedNames = options.displaySeparatedNames;
-        }
+        this.enabled = options.enabled;
+        this.displaySeparatedNames = options.displaySeparatedNames;
       });
     },
 
     save() {
       const options = {
         muteRoomIds: this.muteRoomIds,
+        enabled: this.enabled,
         displaySeparatedNames: this.displaySeparatedNames,
       };
       chrome.runtime.sendMessage({
