@@ -1,14 +1,25 @@
 {
-  "name": "ChatWork Mute Room Extension",
+  "name": "chatwork-mute-room-extension",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch",
+    "build": "NODE_ENV=production webpack",
+    "build:package": "npm run build && ./package.sh"
   },
   "repository": "https://github.com/chocoby/chatwork-mute-room-extension",
   "author": "Kenta Okamoto",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "vue-loader": "^9.5.1",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "vue": "^2.0.1"
   }
 }
