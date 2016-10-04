@@ -1,6 +1,6 @@
 {
-  "name": "ChatWork Mute Room Extension",
-  "description": "Mute Room in ChatWork.",
+  "name": "ChatWork Mute Room",
+  "description": "Mute rooms on ChatWork.",
   "version": "1.0.0",
   "manifest_version": 2,
   "background": {
