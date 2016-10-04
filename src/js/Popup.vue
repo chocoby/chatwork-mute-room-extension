@@ -4,12 +4,26 @@
 
     <h2>Mute rooms</h2>
 
-    <div v-for="roomId in roomIds">
+    <div v-for="roomId in muteRoomIds">
       <p v-text="roomId" class="roomId"></p><button v-on:click="remove(roomId)">Remove</button>
     </div>
 
     <div class="form">
-      <input type="text" size="15" placeholder="1234567" v-model="newRoomId"><button v-on:click="add" v-bind:disabled="newRoomId === ''">Add</button>
+      <input type="text" size="15" placeholder="1234567" v-model="newMuteRoomId"><button v-on:click="add" v-bind:disabled="newMuteRoomId === ''">Add</button>
+    </div>
+
+    <h2>Options</h2>
+
+    <div class="form">
+      <label>
+        <input type="checkbox" v-model="enabled">Enable
+      </label>
+
+      <br>
+
+      <label>
+        <input type="checkbox" v-model="displaySeparatedNames">Display separated room names
+      </label>
     </div>
 
     <div>
@@ -24,43 +38,50 @@ export default {
   data () {
     return {
       message: '',
-      newRoomId: '',
-      roomIds: [],
+      muteRoomIds: [],
+      newMuteRoomId: '',
+      enabled: true,
+      displaySeparatedNames: false,
     }
   },
 
   methods: {
     add() {
-      this.roomIds.push(this.newRoomId);
-      this.newRoomId = '';
+      this.muteRoomIds.push(this.newMuteRoomId);
+      this.newMuteRoomId = '';
     },
 
     remove(roomId) {
-      const index = this.roomIds.indexOf(roomId);
-      this.roomIds.splice(index, 1);
+      const index = this.muteRoomIds.indexOf(roomId);
+      this.muteRoomIds.splice(index, 1);
     },
 
     load() {
       chrome.runtime.sendMessage({ mode: 'loadOptions' }, response => {
         const options = response.options;
 
-        if (options.excludeRooms) {
-          options.excludeRooms.forEach((roomId, _) => {
-            this.roomIds.push(roomId);
+        if (options.muteRoomIds) {
+          options.muteRoomIds.forEach((roomId, _) => {
+            this.muteRoomIds.push(roomId);
           });
         }
+
+        this.enabled = options.enabled;
+        this.displaySeparatedNames = options.displaySeparatedNames;
       });
     },
 
     save() {
       const options = {
-        excludeRooms: this.roomIds
+        muteRoomIds: this.muteRoomIds,
+        enabled: this.enabled,
+        displaySeparatedNames: this.displaySeparatedNames,
       };
       chrome.runtime.sendMessage({
         mode: "saveOptions",
         options: options
       }, response => {
-        this.message = 'Saved'
+        this.message = 'Saved';
       });
     }
   }

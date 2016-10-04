@@ -1,6 +1,8 @@
 'use strict';
 
-let excludeRooms = [];
+let muteRoomIds = [];
+let enabled = true;
+let displaySeparatedNames = false;
 let unreadRoomsName = [];
 let timer = 0;
 
@@ -20,7 +22,18 @@ function getUnreadRoomsName() {
 }
 
 function setCustomTitle() {
-  document.title = `[${unreadRoomsName.length}](${getMentionCounts()}) - ${unreadRoomsName.join('|')}`;
+  let title = `[${unreadRoomsName.length}]`;
+  if (getMentionCounts() > 0) {
+    title += `(${getMentionCounts()})`;
+  }
+
+  if (displaySeparatedNames) {
+    title += ` - ${unreadRoomsName.join('|')}`;
+  } else {
+    title += ` - ChatWork`;
+  }
+
+  document.title = title;
 }
 
 function handleDOM() {
@@ -30,8 +43,8 @@ function handleDOM() {
 
   timer = setTimeout(() => {
     unreadRoomsName = getUnreadRoomsName();
-    excludeRooms.forEach((roomId, _) => {
-      let selector = `#_roomListItems li[data-rid="${roomId}"]`;
+    muteRoomIds.forEach((roomId, _) => {
+      let selector = `#_roomListItems li[data-rid="${roomId}"].roomUnread`;
       let domObj = document.querySelector(selector);
       if (domObj !== null) {
         unreadRoomsName.splice(unreadRoomsName.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
@@ -44,17 +57,31 @@ function handleDOM() {
     });
     setCustomTitle();
     timer = 0;
-  }, 5);
+  }, 100);
 }
 
 chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
   if (response.status === 'success') {
-    excludeRooms = response.options.excludeRooms;
+    if (response.options.muteRoomIds === undefined) {
+      return;
+    }
+
+    if (response.options.enabled !== true) {
+      return;
+    }
+
+    muteRoomIds = response.options.muteRoomIds;
+    displaySeparatedNames = response.options.displaySeparatedNames;
     unreadRoomsName = getUnreadRoomsName();
-    setCustomTitle();
-    handleDOM();
+
+    setTimeout(() => {
+      handleDOM();
+    }, 1000);
 
     document.querySelector('#_roomListArea').addEventListener('DOMNodeInserted', () => {
+      handleDOM();
+    });
+    document.querySelector('title').addEventListener('DOMSubtreeModified', () => {
       handleDOM();
     });
   }
