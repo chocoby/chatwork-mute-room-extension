@@ -3,32 +3,31 @@
 let muteRoomIds = [];
 let enabled = true;
 let displaySeparatedNames = false;
-let unreadRoomsName = [];
+let unreadRoomNames = [];
 let timer = 0;
 
 function getMentionCounts() {
   return document.querySelectorAll('#_roomListArea .mention').length;
 }
 
-function getUnreadRoomsName() {
-  let unreadRoomsName = document.querySelectorAll('#_roomListItems .roomUnread .chatListTitleArea');
-  unreadRoomsName = Array.apply(null, unreadRoomsName).map((room) => { return room.textContent; });
+function getUnreadRoomNames() {
+  let unreadRoomNames = document.querySelectorAll('#_roomListItems .roomUnread .chatListTitleArea');
 
-  if (unreadRoomsName.length === 0) {
-    unreadRoomsName = ['No message!'];
-  }
-
-  return unreadRoomsName;
+  return Array.apply(null, unreadRoomNames).map((room) => { return room.textContent; });
 }
 
 function setCustomTitle() {
-  let title = `[${unreadRoomsName.length}]`;
+  let title = `[${unreadRoomNames.length}]`;
   if (getMentionCounts() > 0) {
     title += `(${getMentionCounts()})`;
   }
 
   if (displaySeparatedNames) {
-    title += ` - ${unreadRoomsName.join('|')}`;
+    if (unreadRoomNames.length > 0) {
+      title += ` - ${unreadRoomNames.join('|')}`;
+    } else {
+      title += ` - No message`;
+    }
   } else {
     title += ` - ChatWork`;
   }
@@ -42,12 +41,12 @@ function handleDOM() {
   }
 
   timer = setTimeout(() => {
-    unreadRoomsName = getUnreadRoomsName();
+    unreadRoomNames = getUnreadRoomNames();
     muteRoomIds.forEach((roomId, _) => {
       let selector = `#_roomListItems li[data-rid="${roomId}"].roomUnread`;
       let domObj = document.querySelector(selector);
       if (domObj !== null) {
-        unreadRoomsName.splice(unreadRoomsName.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
+        unreadRoomNames.splice(unreadRoomNames.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
         domObj.classList.remove('roomUnread');
         let badgeDomObj = domObj.querySelector('.chatListMeta ul.incomplete .unread');
         if (badgeDomObj !== null) {
@@ -72,7 +71,7 @@ chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
 
     muteRoomIds = response.options.muteRoomIds;
     displaySeparatedNames = response.options.displaySeparatedNames;
-    unreadRoomsName = getUnreadRoomsName();
+    unreadRoomNames = getUnreadRoomNames();
 
     setTimeout(() => {
       handleDOM();
