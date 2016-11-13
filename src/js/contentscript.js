@@ -48,9 +48,15 @@ function handleDOM() {
       if (domObj !== null) {
         unreadRoomNames.splice(unreadRoomNames.indexOf(domObj.querySelector('.chatListTitleArea').textContent), 1);
         domObj.classList.remove('roomUnread');
-        let badgeDomObj = domObj.querySelector('.chatListMeta ul.incomplete .unread');
-        if (badgeDomObj !== null) {
-          badgeDomObj.remove();
+
+        const unreadDomObj = domObj.querySelector('.chatListMeta ul.incomplete .unread');
+        if (unreadDomObj !== null) {
+          unreadDomObj.remove();
+        }
+
+        const mentionDomObj = domObj.querySelector('.chatListMeta ul.incomplete .mention');
+        if (mentionDomObj !== null) {
+          mentionDomObj.remove();
         }
       }
     });
