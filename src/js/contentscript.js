@@ -24,12 +24,12 @@ function setCustomTitle() {
 
   if (displaySeparatedNames) {
     if (unreadRoomNames.length > 0) {
-      title += ` - ${unreadRoomNames.join('|')}`;
+      title += ` ${unreadRoomNames.join('|')}`;
     } else {
-      title += ` - No message`;
+      title += ` No message`;
     }
   } else {
-    title += ` - ChatWork`;
+    title += ` ChatWork`;
   }
 
   document.title = title;
