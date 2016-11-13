@@ -21,7 +21,7 @@ Install [Node.js](https://nodejs.org/en/download/)
 
 ```
 $ cd src
-$ npm install
+$ npm install # or yarn install
 $ npm run watch
 ```
 
