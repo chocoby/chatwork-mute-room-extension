@@ -56,7 +56,7 @@ function handleDOM() {
     });
     setCustomTitle();
     timer = 0;
-  }, 100);
+  }, 10);
 }
 
 chrome.runtime.sendMessage({ mode: 'initialize' }, response => {
